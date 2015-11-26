@@ -31,17 +31,21 @@ plot(obamaChart)
 ## keep only the top words
 commonTermsMatrix <- removeSparseTerms(termsMatrix, sparse=0.98)
 commonTermsDf <- as.data.frame(inspect(commonTermsMatrix))
+commonTermsDf <- commonTermsDf[!rownames(commonTermsDf) %in% c('intel'),]
 #inspect(commonTermsMatrix[1:30,1:10])
-
+commonTermsDf.scale <- scale(commonTermsDf)
 ## H Cluster
-fit < GetHClust(commonTermsDf)
+d <- dist(commonTermsDf.scale, method = "euclidean") # distance matrix
+
+fit <- GetHClust(commonTermsDf, d)
 #groups <- cutree(fit, k=5) # cut tree into 5 clusters
 plot(fit) # display dendogram?
 rect.hclust(fit, k=5, border="red")
 
 #K means cluster
-kfit <- GetKMeans(commonTermsDf,6)
+kfit <- GetKMeans(commonTermsDf,6,d)
 clusplot(as.matrix(d), kfit$cluster, color=T, shade=T, labels=2, lines=0)   
+#clusplot(as.matrix(d), kfit$cluster, color=T, shade=T, labels=2, lines=0)   
 
 ## sentiment analysis
 transformedText<- sapply(corpus, as.character)

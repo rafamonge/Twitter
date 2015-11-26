@@ -1,0 +1,16 @@
+base
+knitr
+twitteR
+bitops
+RCurl
+base64enc
+httr
+NLP
+tm
+ggplot2
+SnowballC
+reshape2
+Rstem
+sentiment
+cluster
+dplyr

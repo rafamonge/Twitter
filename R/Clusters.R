@@ -1,17 +1,12 @@
 
-GetHClust<-function(commonTerms){
+GetHClust<-function(commonTerms, distanceMatrix){
   ##clustering
-  commonTermsDf.scale <- scale(commonTerms)
-  d <- dist(commonTermsDf.scale, method = "euclidean") # distance matrix
+  
   ##hierarchy
-  fit <- hclust(d, method="ward")
+  fit <- hclust(distanceMatrix, method="ward")
 }
 
 
-GetKMeans<- function(commonTerms, clusters){
-  ##clustering
-  commonTermsDf.scale <- scale(commonTerms)
-  d <- dist(commonTermsDf.scale, method = "euclidean") # distance matrix
-
-  kfit <- kmeans(d, clusters)   
+GetKMeans<- function(commonTerms, clusters, distanceMatrix){
+  kfit <- kmeans(distanceMatrix, clusters)
 }

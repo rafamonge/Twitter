@@ -1,0 +1,10 @@
+*.config
+*.pdb
+*.dll
+*.exe
+C#/BoxKiteDemo/bin
+C#/TwitterDemo/bin
+C#/packages
+C#/TwitterDemo/obj
+C#/BoxKiteDemo/obj
+R/tweets.rdabackup
