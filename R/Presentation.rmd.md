@@ -32,8 +32,11 @@ Agenda
 - Building a corpus
 - Clusters
 - Sentiment Analysis
-- Other considerations
 
+
+Requirements
+========================================================
+type: section
 
 Tools used
 ========================================================
@@ -46,12 +49,6 @@ Tools used
 	- cluster
 	- sentiment
 	 
-
-Code and presentation
-========================================================
-
-https://github.com/rafamonge/Twitter
-
 Accessing Twitter API
 ========================================================
 
@@ -185,14 +182,14 @@ using tm library
 
 
 
-Creating the corpus
+What's a corpus?
 ========================================================
 class: small-code
 
 
 
 - Collection of texts and metadata
-- Different formats (e.g. word documents, tweets)
+- Different formats
 - Applies common operations regardless of format
 - Used to clean tweets
   - Lower case
@@ -202,17 +199,20 @@ class: small-code
     ```
     [1] "i"      "me"     "my"     "myself" "we"    
     ```
-  - stem words (Running, runs, run -> run)
+  - stem words
 
 Transformed Text
 ========================================================
 class: small-code
 
+Raw Tweets
 
 ```
 [1] "Check out this Great Deal : https://t.co/vwbgCVi91h #2817 #8718 DELL OPTIPLEX DESKTOP ~ INTEL CORE 2 DUO 3.0GHz ~ … https://t.co/CFYH2sALRq"
 [2] "Intel Chief says the #Tablet #Market is a declining #Business https://t.co/saetHbbXcx"                                                      
 ```
+
+Transformed tweets
 
 ```
 [1] "check   great deal httpstcovwbgcvi91h 2817 8718 dell optiplex desktop intel core 2 duo 30ghz â€ httpstcocfyh2salrq"
@@ -243,37 +243,35 @@ Clustering
 ========================================================
 type: section
 
-Hierarchical Cluster - code
+Hierarchical Cluster
 ========================================================
 class: small-code
 
 
 1. Each tweets starts on its own cluster/group
-2. Calculate distance between tweets (Tweets with common word counds will be closer)
-2. Find the 2 closest clusters and merge them into a single cluster
-3. Compute distances (similarities) between the new cluster and each of the old clusters.
-4. Repeat steps 2 and 3 until there's only one cluster.
+2. Calculate distance between tweets (Tweets with common word counts will be closer)
+3. Find the 2 closest clusters and merge them into a single cluster
+4. Compute distances (similarities) between the new cluster and each of the old clusters.
+5. Repeat steps 3 and 4 until there's only one cluster.
 
 
 
   
+
+  
 Hierarchical Cluster - plot
 ========================================================
-
-<img src="Presentation.rmd-figure/unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="750px" />
+![Access Tokens](sourceImages/Rplot.png)
 
 
 Kmeans Cluster
 ========================================================
-1. Defined K initial points (centroids)
+1. Define K initial points (centroids).
 2. Calculate distance of all data points to the centroids and define which one they are closer to
 3. Redefine the centroids as the mean of data points closest to them
 4. Repeat until the centroids don't change
 
 
-```r
-kfit <- kmeans(d, 5)   
-```
 
 kmeans plot
 ========================================================
@@ -284,6 +282,8 @@ class: small-code
 kplot<- clusplot(as.matrix(d), kfit$cluster)  
 plot(kplot)
 ```
+
+![Access Tokens](sourceImages/clusplot.png)
 
 sentiment analysis
 ========================================================
@@ -300,25 +300,20 @@ emotion plot
 ========================================================
 <img src="Presentation.rmd-figure/unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="750px" />
 
-How?
+How? (simplified version)
 ========================================================
 - 3 categories: Positive, Negative, Neutral
 - Database of tweets that have already been classified into those categories
 - Tweet : "I love good food" 
 - Split by words
 
-How?
+How? (simplified version)
 ========================================================
-- Food is found on 455 times in positive tweets
-- Number of words on positive tweets: 1211
-- P(Food|Positive) = 455/ 1211 = 37%
+- Food is found on 250 times in positive tweets
+- Number of words on positive tweets: 1000
+- P(Food|Positive) = 250/ 1000 = 25%
 - I Love good food
-- 25% * 62% * 74%  42% = 0.05
-
-How?
-========================================================
-- 0.05 * P(Positive)
-- 0.05 * 0.33 = 0.016
+- 25% * 62% * 74% * 25% = 0.03
 - That's the Probability of the tweet being positive.
 - Do the same for negative and neutral. Choose the category with the highest probability.
 
@@ -332,7 +327,3 @@ Making this real
 
 Questions?  
 ========================================================
-
-
-
-
