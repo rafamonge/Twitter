@@ -29,7 +29,7 @@ plot(obamaChart)
 
 
 ## keep only the top words
-commonTermsMatrix <- removeSparseTerms(termsMatrix, sparse=0.98)A
+commonTermsMatrix <- removeSparseTerms(termsMatrix, sparse=0.98)
 commonTermsDf <- as.data.frame(inspect(commonTermsMatrix))
 commonTermsDf <- commonTermsDf[!rownames(commonTermsDf) %in% c('intel'),]
 #inspect(commonTermsMatrix[1:30,1:10])
